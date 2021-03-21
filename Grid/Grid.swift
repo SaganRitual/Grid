@@ -2,42 +2,31 @@
 
 import Foundation
 
-/// Defines a grid of cells and functions for navigating it
-struct Grid {
-    enum Origin { case center, lowerLeft, upperLeft }
+enum GridCore { enum Origin { case center, lowerLeft, upperLeft } }
 
-    let origin: Origin
+struct Grid<T: GridCellProtocol> {
+    let origin: GridCore.Origin
     let size: GridSize
-    var theCells: [GridCell]
+    let theCells: [T]
 
-    /// Create a two-dimensional grid of cells
-    ///
-    /// - Parameters:
-    ///   - size: the desired size of the grid
-    ///   - cellLayoutType: full grid layout with origin at the center,
-    ///                     or quadrant I grid with origin at upper or lower left
-    ///   - cellFactory: makes cells that adhere to GridCellProtocol
-    ///
-    /// Note that for the full grid, the dimensions of the grid must be odd,
-    /// to ensure that (0, 0) is the center cell, with the same number of cells
-    /// above as below, and on the right as on the left.
-    init(size: GridSize, origin: Origin = .center) {
-        if origin == .center {
-            precondition(
-                size.width % 2 == 1 && size.height % 2 == 1,
-                "Grid with centered origin must have odd height & width, not \(size)"
-            )
-        }
-
-        self.size = size
+    init(size: GridSize, origin: GridCore.Origin = .center) {
         self.origin = origin
+        self.size = size
 
         self.theCells = (0..<size.area()).map {
             let gridPosition = Grid.getPosition(
                 absoluteIndex: $0, gridSize: size, origin: origin
             )
 
-            return GridCell(gridPosition)
+            return Grid.makeCell(gridPosition)
+        }
+    }
+
+    func cellAt(_ gridPosition: GridPoint) -> T {
+        switch origin {
+        case .center:    return cellAt_oCenter(gridPosition)
+        case .lowerLeft: return cellAt_oLowerLeft(gridPosition)
+        case .upperLeft: return cellAt_oUpperLeft(gridPosition)
         }
     }
 
@@ -46,11 +35,59 @@ struct Grid {
             absoluteIndex: absoluteIndex, gridSize: size, origin: origin
         )
     }
+
+    /// Indicates whether the specified position is on the grid
+    ///
+    /// - Parameter position: The position to check
+    ///
+    /// - Returns: A Bool indicating whether the point is on the grid
+    func isOnGrid(_ position: GridPoint) -> Bool {
+        switch origin {
+        case .center:
+            let hw = size.width / 2, hh = size.height / 2
+            return (-hw...hw).contains(position.x) &&
+                   (-hh...hh).contains(position.y)
+
+        case .upperLeft: fallthrough
+        case .lowerLeft:
+            return
+                (0..<size.width).contains(position.x) &&
+                (0..<size.height).contains(position.y)
+        }
+    }
+
+    /// For iterating over all the cells in the grid
+    func makeIterator() -> IndexingIterator<[T]> { theCells.makeIterator() }
+}
+
+private extension Grid {
+    static func makeCell(_ gridPosition: GridPoint) -> T { T(gridPosition) }
+}
+
+private extension Grid {
+    func cellAt_oCenter(_ gridPosition: GridPoint) -> T {
+        let halfHeight = size.height / 2
+        let yy = halfHeight - gridPosition.y
+
+        let halfWidth = size.width / 2
+        let ix = (yy * size.width) + (halfWidth + gridPosition.x)
+
+        return theCells[ix]
+    }
+
+    func cellAt_oLowerLeft(_ gridPosition: GridPoint) -> T {
+        let ix = (size.height - 1 - gridPosition.y) * size.width + gridPosition.x
+        return theCells[ix]
+    }
+
+    func cellAt_oUpperLeft(_ position: GridPoint) -> T {
+        theCells[position.y * size.width + position.x]
+    }
 }
 
 private extension Grid {
     static func getPosition(
-        absoluteIndex: Int, gridSize: GridSize, origin: Origin
+        absoluteIndex: Int, gridSize: GridSize, origin: GridCore.Origin
     ) -> GridPoint {
         switch origin {
         case .center:
