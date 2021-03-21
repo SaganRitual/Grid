@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		D42280EC26068F6600260AE3 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42280EB26068F6600260AE3 /* main.swift */; };
+		D42280F726068FBE00260AE3 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42280F626068FBE00260AE3 /* Grid.swift */; };
+		D42280FA260690A200260AE3 /* GridPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42280F9260690A200260AE3 /* GridPoint.swift */; };
+		D42280FD26069AEE00260AE3 /* Overload2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42280FC26069AEE00260AE3 /* Overload2D.swift */; };
+		D42281022606B50500260AE3 /* GridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42281012606B50500260AE3 /* GridCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +29,13 @@
 /* Begin PBXFileReference section */
 		D42280E826068F6600260AE3 /* Grid */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Grid; sourceTree = BUILT_PRODUCTS_DIR; };
 		D42280EB26068F6600260AE3 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		D42280F326068F7D00260AE3 /* .overcommit.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .overcommit.yml; sourceTree = "<group>"; };
+		D42280F426068F7D00260AE3 /* swiftlint.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = swiftlint.sh; sourceTree = "<group>"; };
+		D42280F526068F7E00260AE3 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		D42280F626068FBE00260AE3 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
+		D42280F9260690A200260AE3 /* GridPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridPoint.swift; sourceTree = "<group>"; };
+		D42280FC26069AEE00260AE3 /* Overload2D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Overload2D.swift; sourceTree = "<group>"; };
+		D42281012606B50500260AE3 /* GridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +52,9 @@
 		D42280DF26068F6600260AE3 = {
 			isa = PBXGroup;
 			children = (
+				D42280F326068F7D00260AE3 /* .overcommit.yml */,
+				D42280F526068F7E00260AE3 /* .swiftlint.yml */,
+				D42280F426068F7D00260AE3 /* swiftlint.sh */,
 				D42280EA26068F6600260AE3 /* Grid */,
 				D42280E926068F6600260AE3 /* Products */,
 			);
@@ -58,6 +72,10 @@
 			isa = PBXGroup;
 			children = (
 				D42280EB26068F6600260AE3 /* main.swift */,
+				D42280F626068FBE00260AE3 /* Grid.swift */,
+				D42281012606B50500260AE3 /* GridCell.swift */,
+				D42280F9260690A200260AE3 /* GridPoint.swift */,
+				D42280FC26069AEE00260AE3 /* Overload2D.swift */,
 			);
 			path = Grid;
 			sourceTree = "<group>";
@@ -69,6 +87,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D42280EF26068F6600260AE3 /* Build configuration list for PBXNativeTarget "Grid" */;
 			buildPhases = (
+				D4228141260726AD00260AE3 /* ShellScript */,
 				D42280E426068F6600260AE3 /* Sources */,
 				D42280E526068F6600260AE3 /* Frameworks */,
 				D42280E626068F6600260AE3 /* CopyFiles */,
@@ -114,12 +133,36 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		D4228141260726AD00260AE3 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/Users/rob/Projects/Library/NewGrid/Grid/swiftlint.sh\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D42280E426068F6600260AE3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D42280FA260690A200260AE3 /* GridPoint.swift in Sources */,
+				D42280FD26069AEE00260AE3 /* Overload2D.swift in Sources */,
 				D42280EC26068F6600260AE3 /* main.swift in Sources */,
+				D42280F726068FBE00260AE3 /* Grid.swift in Sources */,
+				D42281022606B50500260AE3 /* GridCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
