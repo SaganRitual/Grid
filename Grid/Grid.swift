@@ -22,6 +22,11 @@ struct Grid<T: GridCellProtocol> {
         }
     }
 
+    func cellAt(_ absoluteIndex: Int) -> T {
+        let p = getPosition(absoluteIndex: absoluteIndex)
+        return cellAt(p)
+    }
+
     func cellAt(_ gridPosition: GridPoint) -> T {
         switch origin {
         case .center:    return cellAt_oCenter(gridPosition)
