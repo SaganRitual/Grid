@@ -9,7 +9,14 @@ struct Grid<T: GridCellProtocol> {
     let size: GridSize
     let theCells: [T]
 
-    init(size: GridSize, origin: GridCore.Origin = .center) {
+    init(size: GridSize, origin: GridCore.Origin = .lowerLeft) {
+        if origin == .center {
+            precondition(
+                size.width % 2 == 1 && size.height % 2 == 1,
+                "Center-origin grid requires a cell at (0, 0): w and h must both be odd"
+            )
+        }
+
         self.origin = origin
         self.size = size
 
