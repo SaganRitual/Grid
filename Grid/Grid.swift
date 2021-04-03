@@ -4,7 +4,7 @@ import Foundation
 
 enum GridCore { enum Origin { case center, lowerLeft, upperLeft } }
 
-struct Grid<T: GridCellProtocol> {
+class Grid<T: GridCellProtocol> {
     let origin: GridCore.Origin
     let size: GridSize
     let theCells: [T]

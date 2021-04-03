@@ -2,7 +2,7 @@
 
 import Foundation
 
-protocol GridCellProtocol: class {
+protocol GridCellProtocol: AnyObject {
     var gridPosition: GridPoint { get }
     init(_ gridPosition: GridPoint)
 }
